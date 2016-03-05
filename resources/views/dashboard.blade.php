@@ -6,7 +6,7 @@
 				<header><h3>What do you want to say?</h3></header>
 				<form action="{{ route('createpost')}}" method="post">
 					<div class="form-group">
-						<textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your Post"></textarea>
+			<textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your Post"></textarea>
 					</div>
 					<button type="submit" class="btn btn-primary">Create Post</button>
 					<input type = "hidden" value="{{ Session::token() }}" name="_token">
@@ -25,9 +25,7 @@
 				@foreach ($posts as $post) 
 
 					<article class="post">
-					<p>
-						{{ $post->body }}
-					</p>
+					<p>{{ $post->body }}</p>
 					<div class="info">
 						Posted by {{ $post->user->first_name}} on {{ $post->user->created_at}} 
 					</div>
@@ -36,7 +34,7 @@
 						<a href="#">Dislike</a>
 						@if (Auth::user() == $post->user)
 						|
-						<a href="#">Edit</a> |
+						<a href="#" class="edit">Edit</a> |
 						<a href="{{route('post.delete', ['post_id' => $post->id])}}">Delete</a>
 						@endif
 					</div>
