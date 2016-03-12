@@ -1,18 +1,14 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
 /**
 * 
 */
 class PostController extends Controller
 {
 	public function getDashboard(){
-
 		$posts = Post::orderBy('created_at', 'desc')->get();
 		return view('dashboard', ['posts' =>$posts]);
 	}
@@ -21,19 +17,16 @@ class PostController extends Controller
 		$this->validate($request, [
 			'body'=>'required|max:2000']);
 		$message = "There was an error";
-
 		$post = new Post();
 		$post->body = $request['body'];
 		if ($request->user()->post()->save($post)) 
 		{
-
 			$message = "Post successfully created";
 		}
 		//dd($message);
 		return redirect()->route('dashboard')->with(['message' => $message]);
 		
 	}
-
 	public function getDeletePost($post_id)
 	{
 		$post = Post::where('id', $post_id)->first();
