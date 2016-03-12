@@ -72,4 +72,5 @@
 	var token = '{{ Session::token() }}';
 	var url = '{{ route('edit') }}';
 </script>
+
 @endsection

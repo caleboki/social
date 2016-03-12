@@ -16,4 +16,5 @@ $('#modal-save').on('click', function() {
 	.done(function (msg) {
 		console.log(msg['message']);
 		});
+	
 });
