@@ -25,9 +25,15 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-	Route::get('/', function () {
-    return view('welcome');
-	})->name('home');
+	
+    Route::get('/', function () {
+        if (Auth::check()){
+            return redirect('dashboard');
+        }
+        
+        return view('welcome');
+       })->name('home'); 
+
 
     Route::post('/signup', [
     	'uses'=>'UserController@postSignup',
@@ -40,8 +46,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/logout', [
         'uses'=>'UserController@getLogout',
         'as'=>'logout']);
-	
 
+    Route::get('/account', [
+        'uses'=>'UserController@getAccount',
+        'as'=>'account',
+        'middleware'=>'auth']);
+
+    Route::post('/update-account', [
+        'uses'=>'UserController@postSaveAccount',
+        'as'=>'account.save']);
+	
     Route::get('/dashboard', [
 		'uses'=>'PostController@getDashboard',
 		'as'=>'dashboard',
